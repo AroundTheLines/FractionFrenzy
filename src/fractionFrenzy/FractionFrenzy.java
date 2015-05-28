@@ -42,39 +42,38 @@ public class FractionFrenzy {
 		return grid;		
 	}
 	
-	public Fraction addFractions(Fraction[][] grid, int i1, int j1, int i2, int j2){
-		int numerator;
-		int denominator;
-		if(grid[i1][j1].denominator != grid[i2][j2].denominator){
-			int c = grid[i1][j1].denominator;
-			grid[i1][j1].denominator = grid[i1][j1].denominator*grid[i2][j2].denominator;
-			grid[i1][j1].numerator = grid[i1][j1].numerator*grid[i2][j2].denominator;
-			
-			grid[i2][j2].denominator = grid[i2][j2].denominator*c;
-			grid[i2][j2].numerator = grid[i2][j2].numerator*c;
-		}
-		denominator = grid[i1][j1].denominator;
-		numerator = grid[i1][j1].numerator + grid[i2][j2].numerator; 
-		
-		Fraction x = new Fraction(numerator, denominator);
+	public Fraction multiplyFractions (Fraction f1, Fraction f2){
+		Fraction x = new Fraction(f1.numerator*f2.numerator, f1.denominator*f2.denominator);
 		return x;
 	}
 	
-	public Fraction subtractFractions(Fraction[][] grid, int i1, int j1, int i2, int j2){
+	public Fraction divideFractions (Fraction f1, Fraction f2){
+		//inverses the second fraction and then multiplies
+		int buffer = f2.numerator;
+		f2.numerator = f2.denominator;
+		f2.denominator = buffer;
+		
+		Fraction result = multiplyFractions(f1,f2);
+		return result;
+	}
+	
+	public Fraction addFractions(Fraction f1, Fraction f2){
 		int numerator;
 		int denominator;
-		if(grid[i1][j1].denominator != grid[i2][j2].denominator){
-			int c = grid[i1][j1].denominator;
-			grid[i1][j1].denominator = grid[i1][j1].denominator*grid[i2][j2].denominator;
-			grid[i1][j1].numerator = grid[i1][j1].numerator*grid[i2][j2].denominator;
-			
-			grid[i2][j2].denominator = grid[i2][j2].denominator*c;
-			grid[i2][j2].numerator = grid[i2][j2].numerator*c;
-		}
-		denominator = grid[i1][j1].denominator;
-		numerator = grid[i1][j1].numerator - grid[i2][j2].numerator; 
+		numerator = f1.numerator*f2.denominator + f2.numerator*f1.denominator;
+		denominator = f1.denominator*f2.denominator;
 		
-		Fraction x = new Fraction(numerator, denominator);
+		Fraction x = new Fraction(numerator,denominator);
+		return x;
+	}
+	
+	public Fraction subtractFractions(Fraction f1, Fraction f2){
+		int numerator;
+		int denominator;
+		numerator = f1.numerator*f2.denominator - f2.numerator*f1.denominator;
+		denominator = f1.denominator*f2.denominator;
+		
+		Fraction x = new Fraction(numerator,denominator);
 		return x;
 	}
 	
