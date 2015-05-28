@@ -58,6 +58,7 @@ public class FractionFrenzy {
 	}
 	
 	public Fraction addFractions(Fraction f1, Fraction f2){
+		//multiply denominators and add.
 		int numerator;
 		int denominator;
 		numerator = f1.numerator*f2.denominator + f2.numerator*f1.denominator;
@@ -68,6 +69,7 @@ public class FractionFrenzy {
 	}
 	
 	public Fraction subtractFractions(Fraction f1, Fraction f2){
+		//multiply denominators and subtract.
 		int numerator;
 		int denominator;
 		numerator = f1.numerator*f2.denominator - f2.numerator*f1.denominator;
@@ -75,6 +77,26 @@ public class FractionFrenzy {
 		
 		Fraction x = new Fraction(numerator,denominator);
 		return x;
+	}
+	
+	public Fraction[] sortRow(Fraction[][] grid,int rowNumber){
+		Fraction[] row = new Fraction[grid[rowNumber].length];
+		//copies values in row to new array
+		for(int i = 0; i<grid[rowNumber].length;i++){
+			row[i] = grid[rowNumber][i];
+		}
+		bubbleSort(row);	
+		return row;
+	}
+	
+	public Fraction[] sortColumn(Fraction[][] grid,int columnNumber){
+		Fraction[] row = new Fraction[grid.length];
+		for(int i = 0; i<grid.length;i++){
+			row[i] = grid[i][columnNumber];
+		}
+		bubbleSort(row);
+		
+		return row;
 	}
 	
 	public static int num0to100(){
@@ -85,5 +107,23 @@ public class FractionFrenzy {
 	public static int num1to100(){
 		int x = (int)(Math.random()*100 + 1);
 		return x;
+	}
+	
+	public void bubbleSort(Fraction[] array) {
+	      boolean swapped = true;
+	      int j = 0;
+	      double tmp;
+	      while (swapped) {
+	            swapped = false;
+	            j++;
+	            for (int i = 0; i < array.length - j; i++) {                                       
+	                  if (array[i].value > array[i + 1].value) {                          
+	                        tmp = array[i].value;
+	                        array[i].value = array[i + 1].value;
+	                        array[i + 1].value = tmp;
+	                        swapped = true;
+	                  }
+	            }                
+	      }
 	}
 }
