@@ -23,8 +23,8 @@ public class FractionFrenzy {
 	
 	public static void printGrid(Fraction[][] grid){
 		
-		for(int i = 0;i < grid.length;i++){
-			for(int j = 0; j<grid[i].length;j++){
+		for(int i = 0;i < grid.length;i++){//all rows
+			for(int j = 0; j<grid[i].length;j++){//single row
 				System.out.print(grid[i][j].numerator + "/" + grid[i][j].denominator + "\t");
 			}
 			System.out.println("");
@@ -112,15 +112,15 @@ public class FractionFrenzy {
 	public void bubbleSort(Fraction[] array) {
 	      boolean swapped = true;
 	      int j = 0;
-	      double tmp;
+	      Fraction tmp;
 	      while (swapped) {
 	            swapped = false;
 	            j++;
 	            for (int i = 0; i < array.length - j; i++) {                                       
 	                  if (array[i].value > array[i + 1].value) {                          
-	                        tmp = array[i].value;
-	                        array[i].value = array[i + 1].value;
-	                        array[i + 1].value = tmp;
+	                        tmp = array[i];
+	                        array[i] = array[i + 1];
+	                        array[i + 1] = tmp;
 	                        swapped = true;
 	                  }
 	            }                
